@@ -1,16 +1,25 @@
-# GPT-5 Studio — PostCSS CJS fix (20250821-050449)
+# GPT-5 Studio — Final Vercel CJS (20250821-052324)
 
-- Corrige l'erreur Vercel: *"ReferenceError: module is not defined in ES module scope"* en remplaçant `postcss.config.js` par **`postcss.config.cjs`**.
-- Node 20 + npm install, imports relatifs, pas de 'sk-' dans les sources.
+- **postcss.config.cjs** uniquement (aucun `postcss.config.js`).
+- Node 20 + npm install.
+- Imports relatifs, pas de 'sk-' dans les sources.
+
+## Important
+Si ton repo contient encore `postcss.config.js`, supprime-le avec :
+```
+git rm -f postcss.config.js
+git commit -m "chore: remove old postcss.config.js"
+git push origin main
+```
 
 ## Local
-```bash
+```
 npm install
 copy .env.example .env.local
 npm run dev
 ```
 
 ## Vercel
-- `vercel.json` → npm install + build
-- Node 20 (Settings)
-- Ajoute `OPENAI_API_KEY` en env
+- Settings → Node.js Version: 20.x
+- Env var: OPENAI_API_KEY
+- Redeploy
