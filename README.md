@@ -1,11 +1,14 @@
-# GPT-5 Studio — 20250820-183601
+# GPT-5 Studio — CI auto-retry (20250821-045612)
 
-Démarrage local:
-
+## Local
 ```bash
-pnpm install
-cp .env.example .env.local
-pnpm dev
+npm install
+copy .env.example .env.local
+# mets ta vraie clé dans .env.local
+npm run dev
 ```
 
-Déploiement: importer le repo sur Vercel et ajouter `OPENAI_API_KEY`.
+## Vercel
+- `vercel.json` → npm install + build.
+- Node 20 (package.json/.nvmrc). Vérifie aussi dans Settings.
+- Ajoute `OPENAI_API_KEY` en variable d'env.

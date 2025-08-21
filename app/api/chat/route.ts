@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import { openai } from "@/lib/openai";
-import { sseHeaders, writeEvent } from "@/lib/sse";
+import { openai } from "../../../lib/openai";
+import { sseHeaders, writeEvent } from "../../../lib/sse";
 export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   const { messages = [], attachments = [], devMode = false, useCodeInterpreter = false, model = "gpt-5" } = await req.json();
@@ -15,9 +15,14 @@ export async function POST(req: NextRequest) {
     async start(controller) {
       const enc = new TextEncoder();
       controller.enqueue(enc.encode(writeEvent({ type: "response.started" })));
-      try { for await (const event of stream) controller.enqueue(enc.encode(writeEvent(event))); }
-      catch (e: any) { controller.enqueue(enc.encode(writeEvent({ type: "error", error: String(e?.message || e) }))); }
-      finally { controller.enqueue(enc.encode(writeEvent({ type: "response.completed" }))); controller.close(); }
+      try {
+        for await (const event of stream) controller.enqueue(enc.encode(writeEvent(event)));
+      } catch (e: any) {
+        controller.enqueue(enc.encode(writeEvent({ type: "error", error: String(e?.message || e) })));
+      } finally {
+        controller.enqueue(enc.encode(writeEvent({ type: "response.completed" })));
+        controller.close();
+      }
     }
   });
   return new Response(rs, { headers: sseHeaders() });

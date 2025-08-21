@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { openai } from "@/lib/openai";
+import { openai } from "../../../lib/openai";
 export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   try {

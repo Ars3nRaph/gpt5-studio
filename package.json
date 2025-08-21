@@ -7,8 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy:vercel": "vercel --prod"
+    "lint": "next lint"
   },
   "engines": {
     "node": "20.x"
@@ -30,7 +29,6 @@
     "@types/react": "^18.2.66",
     "@types/node": "^20.12.7",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
-    "vercel": "^34.2.4"
+    "eslint-config-next": "14.2.5"
   }
 }
