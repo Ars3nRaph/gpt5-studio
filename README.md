@@ -1,16 +1,7 @@
-# GPT-5 Studio — Final Vercel CJS (20250821-052324)
+# GPT-5 Studio — Fix File Purpose (20250821-054351)
 
-- **postcss.config.cjs** uniquement (aucun `postcss.config.js`).
-- Node 20 + npm install.
-- Imports relatifs, pas de 'sk-' dans les sources.
-
-## Important
-Si ton repo contient encore `postcss.config.js`, supprime-le avec :
-```
-git rm -f postcss.config.js
-git commit -m "chore: remove old postcss.config.js"
-git push origin main
-```
+- Corrige l'erreur TS: `"file_search" is not assignable to type 'FilePurpose'` en mettant `purpose: "assistants"` et en utilisant `new File([buf], name)`.
+- Toujours: Node 20 + npm install, imports relatifs, postcss.config.cjs.
 
 ## Local
 ```
@@ -20,6 +11,7 @@ npm run dev
 ```
 
 ## Vercel
-- Settings → Node.js Version: 20.x
+- `vercel.json` → npm install + build
+- Node 20 (Settings)
 - Env var: OPENAI_API_KEY
-- Redeploy
+```
